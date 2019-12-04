@@ -19,9 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView[] allPlayers;
     private int pos = 0;
     static Switch main_sound;
-    private  boolean stop = false;
     private MediaPlayer startM;
     private ImageView main_IMG_title;
+    private final Handler handler = new Handler();
+    private Runnable myRun;
+    private boolean  first = false;
 
 
     @Override
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     main_BTN_exit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                stop = true;
+
                 MainActivity.this.finish();
                 System.exit(0);
             }
@@ -87,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        stop = true;
+        handler.removeCallbacks(myRun);
         super.onStop();
         startM.stop();
+        first= true;
     }
 
 
@@ -103,19 +106,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void openNewActivityGame() {
         startM.stop();
-        stop = true;
+        handler.removeCallbacks(myRun);
         finish();
         Intent intent = new Intent(this,game.class);
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startM.start();
 
-
+        if (first == true) {
+            handler.postDelayed(myRun, 400);
+            first = false;
+        }
+    }
     private void loopFunction() {
 
-        if (stop == false) {
-            final Handler handler = new Handler();
-            Runnable myRun = new Runnable() {
+            myRun = new Runnable() {
                 @Override
                 public void run() {
                     loopFunction();
@@ -124,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             };
             handler.postDelayed(myRun, 400);
         }
-    }
+
 
     private void showPlayer() {
         pos++;

@@ -18,6 +18,8 @@ import java.util.Random;
 
 public class game extends AppCompatActivity {
     private Random rand = new Random();
+     static final Handler handler = new Handler();
+    Runnable myRun;
     private Button game_BTN_left,game_BTN_right,game_BTN_pause,game_BTN_close;
 
     private ImageView[] playerBoard;
@@ -29,7 +31,7 @@ public class game extends AppCompatActivity {
     private ImageView[] lives;
     private ImageView game_IMG_heart1,game_IMG_heart2,game_IMG_heart3;
 
-    private boolean stop = false;
+    private boolean stop = false,first=false;
     private TextView game_LBL_score;
     private MediaPlayer bomb;
 
@@ -102,6 +104,7 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(stop == false) {
+                    handler.removeCallbacks(myRun);
                     game_BTN_pause.setBackgroundResource(R.drawable.play_new);
                     game_BTN_left.setEnabled(false);
                     game_BTN_right.setEnabled(false);
@@ -129,8 +132,22 @@ public class game extends AppCompatActivity {
     @Override
     protected void onStop() {
         stop = true;
+        handler.removeCallbacks(myRun);
         super.onStop();
+        first = true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(first == true) {
+            handler.postDelayed(myRun, time);
+            first = true;
+            stop = false;
+        }
+    }
+
 
     private void startLives() {
         countLives = 3;
@@ -179,10 +196,8 @@ public class game extends AppCompatActivity {
     }
 
     private void loopFunction() {
-
-        if (stop == false) {
-            final Handler handler = new Handler();
-            Runnable myRun = new Runnable() {
+      //  if (stop == false) {
+             myRun = new Runnable() {
                 @Override
                 public void run() {
                     score = score + 10;
@@ -191,13 +206,12 @@ public class game extends AppCompatActivity {
                     playGame();
                 }
             };
-
             handler.postDelayed(myRun, time);
             time -= 3;
             if (time <= 200)
                 time = 200;
         }
-    }
+  //  }
 
     private void playGame() {
         if (posRowBoard == -1)
@@ -227,7 +241,8 @@ public class game extends AppCompatActivity {
     }
 
     private void openNewActivity() {
-        stop = true;
+       // stop = true;
+        handler.removeCallbacks(myRun);
         mySignal.vibrate(this, 500);
         Intent intent = new Intent(this, gameOver.class);
         intent.putExtra("Score", "" + score);
