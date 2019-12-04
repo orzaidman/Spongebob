@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Spongebob</string>
+    <string-array name="choseBackground">
+        <item> "Default" </item>
+        <item> "Black" </item>
+        <item> "Pink" </item>
+    </string-array>
+</resources>
