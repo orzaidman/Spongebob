@@ -176,4 +176,33 @@ public class mySignal {
                 .start();
     }
 
+    public static void animatePlus(final TextView plus) {
+
+        plus.setScaleY(1);
+        plus.setScaleX(1);
+
+        plus.animate()
+                .scaleY(0)
+                .scaleX(0)
+                .setDuration(2000)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+                    }
+                })
+                .setInterpolator(new DecelerateInterpolator())
+                .start();
+    }
 }
