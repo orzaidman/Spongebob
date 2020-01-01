@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/spongebob_background"
+    android:background="@drawable/img_spongebob_background"
     android:keepScreenOn="true"
     android:orientation="vertical"
-    tools:context=".gameOver">
+    tools:context=".GameOver">
 
     <TextView
         android:id="@+id/over_LBL"
@@ -18,7 +18,7 @@
         android:fontFamily="serif-monospace"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textColor="#FFFFFF"
         android:textSize="60dp"
         />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/over_LBL"
         android:layout_centerInParent="true"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="40dp"
         android:textStyle="bold"
         android:fontFamily="serif-monospace"
         android:textColor="#FFFFFF"
@@ -39,11 +39,11 @@
 
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="280dp"
-        android:layout_below="@+id/over_LBL_score"
         android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/sp_end" />
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/img_over" />
 
     <Button
         android:id="@+id/over_BTN_menu"
@@ -58,6 +58,8 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
         android:text="Menu" />
+
+
 
     <Button
         android:id="@+id/over_BTN_exit"
@@ -77,13 +79,27 @@
         android:id="@+id/over_LBL_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:fontFamily="serif-monospace"
         android:layout_below="@id/over_BTN_exit"
         android:layout_marginLeft="10dp"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:text="SCORE: " />
+
+
+    <TextView
+        android:id="@+id/over_LBL_high"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:fontFamily="serif-monospace"
+        android:layout_below="@id/over_LBL_score"
+        android:layout_marginLeft="10dp"
+        android:textSize="30dp"
+        android:text="" />
 
 </RelativeLayout>

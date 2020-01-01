@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class mySignal {
+public class MySignal {
 
     public static void vibrate(Context context, int duration) {
         Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -205,4 +205,6 @@ public class mySignal {
                 .setInterpolator(new DecelerateInterpolator())
                 .start();
     }
+
+
 }
